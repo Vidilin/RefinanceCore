@@ -1,0 +1,37 @@
+﻿
+@model IndexViewModel
+
+@using System.ComponentModel.DataAnnotations;
+
+@{
+    ViewData["Title"] = "Quotas";
+}
+
+<h2>Quotas</h2>
+
+<h1>Список квот</h1>
+<table class="table">
+    <tr><th>Номер</th><th>Город</th><th>Цель рефинансирования</th><th>Сумма рефинансирования</th></tr>
+    @foreach (var q in Model.Quotas)
+    {
+    <tr><td>@q.Id</td><td>@q.CityName</td><td>@q.Purpose</td><td>@q.Amount</td></tr>
+    }
+</table>
+@if (Model.PageViewModel.HasPreviousPage)
+{
+<a asp-action="Quotas"
+   asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+   class="btn btn-default btn">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Назад
+</a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+<a asp-action="Quotas"
+   asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+   class="btn btn-default btn">
+    <i class="glyphicon glyphicon-chevron-right"></i>
+    Вперед
+</a>
+}
