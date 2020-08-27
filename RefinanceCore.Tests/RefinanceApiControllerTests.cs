@@ -8,6 +8,7 @@ using Moq;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Newtonsoft.Json.Linq;
 
 namespace RefinanceCore.Tests
 {
@@ -47,7 +48,9 @@ namespace RefinanceCore.Tests
 
             //Assert
             var jsonResult = Assert.IsType<JsonResult>(result);
-            //var l = Jso
+            dynamic jsonObject = JObject.Parse(jsonResult.Value);
+            int page = (int)jsonObject.pageViewModel.pageNumber;
+            Assert.Equal(1, page);
         }
 
         [Fact]
